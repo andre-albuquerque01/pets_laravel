@@ -1,4 +1,4 @@
-@extends('layout.navBar')
+@extends('layouts.navBar')
 @section('title', 'Pets')
 @section('navBar')
 

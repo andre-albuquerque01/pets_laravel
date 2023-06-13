@@ -1,4 +1,4 @@
-@extends('layout.navBar')
+@extends('layouts.navBar')
 @section('title', 'Cadastro do produto')
 @section('navBar')
     <div class="text-center mb-4 mt-8">
@@ -8,6 +8,7 @@
 
     <div class="items-center justify-center m-2">
         <form class="max-w-lg mx-auto mt-8">
+            @csrf
             <div class="flex items-center justify-center">
                 <label for="imagem"
                     class="cursor-pointer flex items-center justify-center w-64 h-64 border-2 border-gray-300 border-dashed rounded-md">
