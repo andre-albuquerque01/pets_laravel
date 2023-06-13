@@ -16,6 +16,24 @@
                 required autofocus autocomplete="first_name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
+        <!-- last_name -->
+        <div class="mt-4">
+            <div class="flex">
+                <x-input-label for="DDD" :value="__('DDD')" />
+                <div class="ml-7">
+                    <x-input-label for="number" :value="__('Número')" />
+                </div>
+            </div>
+            <div class="flex">
+                <x-text-input id="DDD" class="block mt-1 w-12" type="number" name="ddd" :value="old('ddd')"
+                    required autofocus autocomplete="DDD" />
+                <x-input-error :messages="$errors->get('ddd')" class="mt-2" />
+
+                <x-text-input id="number" class="block mt-1 ml-2 w-full" type="number" name="number" :value="old('number')"
+                    required autofocus autocomplete="number" />
+                <x-input-error :messages="$errors->get('number')" class="mt-2" />
+            </div>
+        </div>
 
         <!-- Email Address -->
         <div class="mt-4">

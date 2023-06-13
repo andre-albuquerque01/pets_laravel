@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('email')->unique()->comment('Contem o email do usuario');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->comment('Contem a senha do usuário');
-            $table->string('status'. 2)->comment("Contem se o usuário estpa ativo ou não");
+            $table->string('status', 2)->comment("Contem se o usuário estpa ativo ou não");
             $table->char('term_of_concience', 1)->comment('Contem o termo de aceite se o usuário aceitou');
 
-            $table->unsignedBigInteger('id_phone')->comment('Contem a chave estrangeira de phone_numbers');
-            $table->foreign('id_phone')->references('id_phone')->on('phone_numbers');
+            $table->smallInteger('ddd')->comment('Contem o ddd (codigo) do estado');
+            $table->string('number', 15)->comment('Contem o numero do usuário');
             $table->rememberToken();
             $table->timestamps();
         });
