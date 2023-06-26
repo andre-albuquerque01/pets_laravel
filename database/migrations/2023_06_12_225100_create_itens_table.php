@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('itens', function (Blueprint $table) {
             $table->id('id_itens')->comment('Contem a chave primaria');
+            $table->text('title')->comment('Contem o titulo do iten');
             $table->text('description')->comment('Contem a descrição do iten');
             $table->double('price')->comment('Contem a preço do iten');
             $table->string('place', 100)->comment('Contem o local do iten');
-            $table->string('status', 2)->comment('Contem o status do iten');
+            $table->string('status_itens', 2)->comment('Contem o status do iten');
 
             $table->unsignedBigInteger('id_users')->comment('Contem a chave estrangeira de usuario');
             $table->foreign('id_users')->references('id_users')->on('users');

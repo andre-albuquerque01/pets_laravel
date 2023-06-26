@@ -7,23 +7,23 @@
     </div>
 
     <div class="items-center justify-center m-2">
-        <form class="max-w-lg mx-auto mt-8">
+        <form class="max-w-lg mx-auto mt-8" method="POST" action="{{ route('registerIten') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex items-center justify-center">
-                <label for="imagem"
-                    class="cursor-pointer flex items-center justify-center w-64 h-64 border-2 border-gray-300 border-dashed rounded-md">
-                    <input type="file" id="imagem" name="imagem" class="hidden" accept="image/*"
+                <label for="image"
+                    class="cursor-pointer flex items-center justify-center w-44 h-44 border-2 border-gray-300 border-dashed rounded-md">
+                    <input type="file" id="image" name="image" class="hidden" accept="image/*"
                         onchange="exibirImagem(event)">
-                    <span class="text-gray-500">Clique para selecionar uma imagem</span>
+                    <span class="text-gray-500 text-center">Clique para selecionar uma imagem</span>
                 </label>
                 <img id="imagem-preview" class="w-64 h-64 object-cover rounded-full hidden">
             </div>
 
             <div class="mb-4 mt-8">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nome:</label>
-                <input type="text" id="name" name="name"
+                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Título:</label>
+                <input type="text" id="title" name="title"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
-                    placeholder="Digite seu nome">
+                    placeholder="Digite o título do produto">
             </div>
             <div class="mb-4 mt-8">
                 <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Descrição:</label>
@@ -38,13 +38,18 @@
                     placeholder="Digite a preço do produto">
             </div>
             <div class="mb-4 mt-8">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Categoria:</label>
-                <select
-                    class="w-full px-3 py-2 border bg-white border-gray-300 rounded-md shadow-sm focus:outline-none">
-                    <option value="" disabled selected>Selecione uma categoria</option>
-                    <option value="opcao1">Opção 1</option>
-                    <option value="opcao2">Opção 2</option>
-                    <option value="opcao3">Opção 3</option>
+                <label for="place" class="block text-gray-700 text-sm font-bold mb-2">Local do produto:</label>
+                <input type="text" step="0.01" id="place" name="place"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                    placeholder="Digite o local do produto">
+            </div>
+            <div class="mb-4 mt-8">
+                <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">Categoria:</label>
+                <select class="w-full px-3 py-2 border bg-white border-gray-300 rounded-md shadow-sm focus:outline-none" id="categoria" name="category">
+                    <option value="" disabled selected>Selecione a categoria do produto</option>
+                    @foreach ($categorysChoise as $categoria)
+                    <option value="{{ $categoria->id_category}}">{{ $categoria->description }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -54,5 +59,5 @@
             </div>
         </form>
     </div>
-    <script src="{{ asset('js/script.js') }}"></script>
+
 @endsection

@@ -12,7 +12,14 @@ class ItensController extends Controller
      */
     public function index()
     {
-        //
+        $itens = Itens::paginate(3);
+        return view('index', ['itens' => $itens]);
+    }
+    public function detail($itens)
+    {
+        $itens = Itens::where('id_itens', $itens)->first();
+        return view('details', ['itens' => $itens]);
+
     }
 
     /**
@@ -36,7 +43,6 @@ class ItensController extends Controller
      */
     public function show(itens $itens)
     {
-        //
     }
 
     /**

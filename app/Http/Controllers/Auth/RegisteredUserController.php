@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Validation\Rule;
+
 
 class RegisteredUserController extends Controller
 {
@@ -35,26 +37,25 @@ class RegisteredUserController extends Controller
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'ddd' => ['required', 'number', 'max:99', 'min:01'],
-            'number' => ['required', 'number', 'max:999999999', 'min:000000000'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'ddd' => ['required', 'numeric', 'max:99', 'min:01'],
+            'number' => ['required', 'numeric',  'required', 'regex:/^\d{8,9}$/', Rule::unique(User::class)],
+            'email' => ['required', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'term_of_concience' => ['required'],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'ddd' => $request->ddd,
             'number' => $request->number,
             'email' => $request->email,
-            'status' => 'A',
+            'status_user' => 'A',
             'term_of_concience' => 'A',
             'password' => Hash::make($request->password),
         ]);
 
-       
+
 
         event(new Registered($user));
 

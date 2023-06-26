@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InsertController;
+use App\Http\Controllers\ItensController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [ItensController::class, 'index'])->name('index');
+
+Route::get('cadastro', function () {
+    return view('cadastrar');
+})->middleware(['auth', 'verified'])->name('cadastro');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,4 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::post('registerIten', [InsertController::class, 'insertIten'])->name('registerIten');
+
+Route::get('register', function () {
+    return view('register');
+})->name('register');
+
+Route::get('/detail/{id}', [ItensController::class, 'detail'])->name('detail');
+
+require __DIR__ . '/auth.php';
