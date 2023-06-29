@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\categorys;
+use App\Models\Image;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,8 +22,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // Carrega a Seeder que criou
-            CategorysSeeder::class
+            // Carrega a Seeder que criar os dados fake na tabela
+            // ImageSeeder::class,
+            ItensSeeder::class
         ]);
     }
 }

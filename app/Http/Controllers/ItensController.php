@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\itens;
+use App\Models\Itens;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ItensController extends Controller
 {
@@ -12,14 +13,34 @@ class ItensController extends Controller
      */
     public function index()
     {
-        $itens = Itens::paginate(3);
+        // Fazer inner join das tabelas
+        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->simplePaginate(51);
         return view('index', ['itens' => $itens]);
     }
     public function detail($itens)
     {
-        $itens = Itens::where('id_itens', $itens)->first();
-        return view('details', ['itens' => $itens]);
+        // Fazer inner join das tabelas
+        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->where('id_itens', $itens)->first();
 
+        if ($itens && $itens->updated_at) :
+            $formatDate = $itens->updated_at->format('H:i - d/m/Y');
+        else :
+            $formatDate = date('H:i - d/m/Y');
+        endif;
+        return view('details', ['itens' => $itens, 'formatDate' => $formatDate]);
+    }
+
+    public function showEdit($itens)
+    {
+        // Fazer inner join das tabelas
+        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->where('id_itens', $itens)->first();
+
+        if ($itens && $itens->updated_at) :
+            $formatDate = $itens->updated_at->format('H:i - d/m/Y');
+        else :
+            $formatDate = date('H:i - d/m/Y');
+        endif;
+        return view('edit', ['itens' => $itens]);
     }
 
     /**

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InsertController;
 use App\Http\Controllers\ItensController;
+use App\Http\Controllers\UpadateItensController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,5 +40,8 @@ Route::get('register', function () {
 })->name('register');
 
 Route::get('/detail/{id}', [ItensController::class, 'detail'])->name('detail');
+Route::get('/edit/{id}', [ItensController::class, 'showEdit'])->name('edit');
+
+Route::post('editItens/{id}', [UpadateItensController::class, 'upadateIten'])->name('editItens');
 
 require __DIR__ . '/auth.php';

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use App\Models\image;
-use App\Models\itens;
+use App\Models\Image;
+use App\Models\Itens;
 
 class InsertController extends Controller
 {
@@ -23,7 +23,9 @@ class InsertController extends Controller
 
                 // Inserir na tabela 'images'
                 $id_image = Image::insertGetId([
-                    'file_name' => $newName_image
+                    'file_name' => $newName_image,
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ]);
 
                 // Obtém o ID do usuário autenticado
@@ -38,7 +40,10 @@ class InsertController extends Controller
                     'status_itens' => 'A',
                     'id_users' => $id_user,
                     'id_category' => $request->category,
-                    'id_image' => $id_image
+                    'id_image' => $id_image,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                    // $request->all()
                 ]);
 
                 DB::commit(); // Confirma as inserções no banco de dados
