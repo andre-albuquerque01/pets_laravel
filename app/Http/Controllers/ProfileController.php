@@ -16,8 +16,18 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
+        // Obtém o usuário autenticado
+        $user = $request->user();
+
+        // Retorna a visualização com os valores do usuário
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'firstName' => $user->first_name,
+            'lastName' => $user->last_name,
+            'ddd' => $user->ddd,
+            'number' => $user->number,
+            'email' => $user->email,
         ]);
     }
 
@@ -30,6 +40,10 @@ class ProfileController extends Controller
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+            $request->user()->first_name = $request->input('first_name');
+            $request->user()->last_name = $request->input('last_name');
+            $request->user()->ddd = $request->input('ddd');
+            $request->user()->number = $request->input('number');
         }
 
         $request->user()->save();

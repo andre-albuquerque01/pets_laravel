@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InsertController;
 use App\Http\Controllers\ItensController;
-use App\Http\Controllers\UpadateItensController;
+use App\Http\Controllers\UpdateItensController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +23,7 @@ Route::get('cadastro', function () {
     return view('cadastrar');
 })->middleware(['auth', 'verified'])->name('cadastro');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ItensController::class, 'showDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,6 +40,8 @@ Route::get('register', function () {
 Route::get('/detail/{id}', [ItensController::class, 'detail'])->name('detail');
 Route::get('/edit/{id}', [ItensController::class, 'showEdit'])->name('edit');
 
-Route::post('editItens/{id}', [UpadateItensController::class, 'upadateIten'])->name('editItens');
+Route::post('editItens', [UpdateItensController::class, 'updateIten'])->name('editItens');
+Route::get('/deleteIten/{id}', [UpdateItensController::class, 'deleteIten'])->name('deleteIten');
+
 
 require __DIR__ . '/auth.php';

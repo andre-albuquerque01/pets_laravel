@@ -14,7 +14,7 @@ class ItensController extends Controller
     public function index()
     {
         // Fazer inner join das tabelas
-        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->simplePaginate(51);
+        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->where('status_itens', '=', 'A')->simplePaginate(51);
         return view('index', ['itens' => $itens]);
     }
     public function detail($itens)
@@ -32,16 +32,28 @@ class ItensController extends Controller
 
     public function showEdit($itens)
     {
+        $id_itens = base64_decode($itens);
         // Fazer inner join das tabelas
-        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->where('id_itens', $itens)->first();
-
-        if ($itens && $itens->updated_at) :
-            $formatDate = $itens->updated_at->format('H:i - d/m/Y');
-        else :
-            $formatDate = date('H:i - d/m/Y');
-        endif;
+        $itens = Itens::join('images', 'itens.id_image', '=', 'images.id_image')->where('id_itens', $id_itens)->first();
         return view('edit', ['itens' => $itens]);
     }
+    public function showDashboard()
+    {
+        $users = auth()->user()->id_users;
+
+        // $user = Itens::join('users', function ($join) use ($users) {
+        //     $join->on('itens.id_users', '=', 'users.id_users')
+        //         ->where('itens.status_itens', '=', 'A')
+        //         ->where('users.id_users', '=', $users);
+        // })->simplePaginate(4);
+
+        $user = Itens::join('users', 'itens.id_users', '=', 'users.id_users')
+            ->where('itens.status_itens', '=', 'A')
+            ->where('users.id_users', '=', $users)->simplePaginate(4);
+
+        return view('dashboard', ['user' => $user]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

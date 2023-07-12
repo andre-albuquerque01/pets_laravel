@@ -5,14 +5,14 @@
         <!-- first_name -->
         <div>
             <x-input-label for="name" :value="__('Nome')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="first_name" :value="old('name')"
+            <x-text-input id="name" class="block mt-1 w-full py-1" type="text" name="first_name" :value="old('name')"
                 required autofocus autocomplete="first_name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
         <!-- last_name -->
         <div class="mt-4">
             <x-input-label for="name" :value="__('Sobrenome')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="last_name" :value="old('name')"
+            <x-text-input id="name" class="block mt-1 w-full py-1" type="text" name="last_name" :value="old('name')"
                 required autofocus autocomplete="first_name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="flex">
-                <x-text-input id="DDD" class="block mt-1 w-12" type="number" name="ddd" :value="old('ddd')"
+                <x-text-input id="DDD" class="block mt-1 w-12 py-1" type="number" name="ddd" :value="old('ddd')"
                     required autofocus autocomplete="DDD" />
                 <x-input-error :messages="$errors->get('ddd')" class="mt-2" />
 
-                <x-text-input id="number" class="block mt-1 ml-2 w-full" type="number" name="number" :value="old('number')"
+                <x-text-input id="number" class="block mt-1 ml-2 w-full py-1" type="number" name="number" :value="old('number')"
                     required autofocus autocomplete="number" />
                 <x-input-error :messages="$errors->get('number')" class="mt-2" />
             </div>
@@ -38,7 +38,7 @@
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+            <x-text-input id="email" class="block mt-1 w-full py-1" type="email" name="email" :value="old('email')"
                 required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
@@ -47,7 +47,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+            <x-text-input id="password" class="block mt-1 w-full py-1" type="password" name="password" required
                 autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -57,7 +57,7 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+            <x-text-input id="password_confirmation" class="block mt-1 w-full py-1" type="password"
                 name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
